@@ -1,0 +1,21 @@
+/* ---------- 登录页 ---------- */
+.login-wrap { min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 20px; position: relative; }
+.login-card { width: 420px; max-width: 94vw; }
+.login-card .logo { text-align: center; font-size: 40px; margin-bottom: 6px; }
+.login-mark { width: 48px; height: 48px; display: grid; place-items: center; margin: 0 auto 10px; border: 1px solid var(--border); border-radius: 8px; color: var(--primary); font-size: 24px !important; font-weight: 800; }
+.login-card h1 { text-align: center; font-size: 22px; margin-bottom: 4px; }
+.login-card .sub { text-align: center; color: var(--text-2); font-size: 13px; margin-bottom: 22px; }
+.form-status { min-height: 24px; margin: -2px 0 8px; font-size: 13px; text-align: center; color: var(--text-2); }
+.form-status.pending { color: var(--primary); }
+.form-status.success { color: var(--success); }
+.form-status.error { color: var(--danger); }
+.tabs { display: flex; background: #f1f3f8; border-radius: 10px; padding: 4px; margin-bottom: 18px; }
+.tabs .tab { flex: 1; text-align: center; padding: 8px; border-radius: 8px; cursor: pointer; font-size: 14px; color: var(--text-2); }
+.tabs .tab.active { background: #fff; color: var(--text); font-weight: 600; box-shadow: 0 1px 3px rgba(0, 0, 0, .08); }
+.role-pick { display: flex; gap: 10px; margin-bottom: 14px; }
+.role-pick label {
+  flex: 1; border: 1.5px solid var(--border); border-radius: 10px; padding: 10px; text-align: center;
+  cursor: pointer; font-size: 14px; transition: all .15s;
+}
+.role-pick label.sel { border-color: var(--primary); background: var(--primary-light); color: var(--primary); font-weight: 600; }
+.settings-gear { position: absolute; top: 18px; right: 22px; }

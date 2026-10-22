@@ -1,0 +1,41 @@
+@media print {
+  html,
+  body {
+    min-width: 0;
+    height: auto;
+    background: #fff;
+  }
+
+  .topbar,
+  .workspace-sidebar,
+  .workspace-list,
+  .student-top-nav,
+  .student-bottom-nav,
+  .modal-overlay,
+  .toast,
+  .btn,
+  .no-print {
+    display: none !important;
+  }
+
+  .workspace-shell,
+  .student-layout,
+  .teacher-layout {
+    display: block;
+    min-width: 0;
+  }
+
+  .workspace-main,
+  .student-main,
+  .teacher-main,
+  .admin-main {
+    overflow: visible;
+    padding: 0;
+  }
+
+  .card,
+  .data-surface {
+    border: 0;
+    box-shadow: none;
+  }
+}

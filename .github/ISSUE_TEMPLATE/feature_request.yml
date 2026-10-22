@@ -1,0 +1,22 @@
+name: 功能建议
+description: 描述使用场景和期望解决的问题。
+title: "[Feature] "
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: 使用场景和问题
+      description: 说明受影响的角色，以及当前流程中遇到的问题。不要填写真实学生信息。
+    validations:
+      required: true
+  - type: textarea
+    id: solution
+    attributes:
+      label: 期望行为
+      description: 描述完成后的操作流程和验收条件。
+    validations:
+      required: true
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: 已考虑的替代方式

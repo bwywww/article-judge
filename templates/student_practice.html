@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>作文批改平台 - 自主练习</title>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="/static/css/style.css?v=14">
+</head>
+<body class="student-page">
+  <header class="topbar">
+    <div class="brand">作文批改平台 <span class="role-tag">学生</span></div>
+    <nav class="student-top-nav" aria-label="学生功能">
+      <a class="nav-link" href="/student/assignments" data-feature="assignments">老师作业</a>
+      <a class="nav-link active" href="/student/practice" data-feature="practice">自主练习</a>
+      <a class="nav-link" href="/student/history" data-feature="reporting">成长记录</a>
+    </nav>
+    <div class="topbar-right">
+      <span class="user-name"></span>
+      <button id="btn-logout" class="btn ghost">退出</button>
+    </div>
+  </header>
+
+  <div id="banner-key" class="banner-key plain" hidden>
+    AI 接口尚未配置，请联系管理员。
+  </div>
+
+  <main class="student-main narrow-main">
+    <div class="page-heading">
+      <div><h1>自主练习</h1><p>独立于老师作业，只保存到个人历史。</p></div>
+    </div>
+    <section class="practice-workspace">
+      <div class="practice-editor">
+        <div class="form-grid">
+          <label class="field"><span>作文题目（选填）</span>
+            <input class="input" id="st-title" placeholder="如：《我的暑假生活》"></label>
+          <label class="field"><span>写作要求（选填）</span>
+            <input class="input" id="st-prompt" placeholder="如：不少于 600 字，注意细节描写"></label>
+        </div>
+        <label class="field"><span>作文内容<span class="req"> *</span></span>
+          <textarea class="input essay-editor" id="st-text" rows="17" placeholder="在这里粘贴作文，或上传 PDF / Word / TXT 文件"></textarea></label>
+        <div class="editor-actions">
+          <input type="file" id="st-file" accept=".pdf,.docx,.txt,.md" hidden>
+          <button class="btn" id="st-upload" data-feature-write="imports">上传文件</button>
+          <span class="word-count" id="st-count">0 字</span>
+          <span class="action-spacer"></span>
+          <button class="btn primary" id="st-grade">开始批改</button>
+        </div>
+      </div>
+
+      <div id="result-area" hidden class="practice-result">
+        <div class="pane-head result-head"><h2>批改结果</h2>
+          <div class="ops"><button class="btn small" id="st-export">导出 PDF</button>
+            <button class="btn small ghost" id="st-upgrade">生成润色提升版</button></div>
+        </div>
+        <div id="st-result"></div>
+      </div>
+    </section>
+  </main>
+
+  <nav class="student-bottom-nav" aria-label="学生移动端功能">
+    <a href="/student/assignments" data-feature="assignments">老师作业</a>
+    <a class="active" href="/student/practice" data-feature="practice">自主练习</a>
+    <a href="/student/history" data-feature="reporting">成长记录</a>
+  </nav>
+  <div id="modal" class="modal" hidden role="dialog" aria-modal="true"><div class="modal-box" id="modal-box"></div></div>
+  <script type="module" src="/static/js/student_practice.js?v=3"></script>
+</body>
+</html>

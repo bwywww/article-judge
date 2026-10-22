@@ -1,0 +1,46 @@
+# Python environments, caches, and build output.
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+.coverage.*
+htmlcov/
+*.egg-info/
+build/
+dist/
+
+# Local runtime data, uploads, and backups.
+/data/*
+!/data/.gitkeep
+/essay_platform/data/
+*.db
+*.db-wal
+*.db-shm
+*.sqlite
+*.sqlite3
+*.bak
+*.log
+
+# Local credentials and developer tools.
+deepseekv4.txt
+.env
+.env.*
+!.env.example
+.ai-work/
+.claude/
+
+# Local school documents and investigation output.
+/testdata/
+/需求.txt
+/__route_scan_no_init__/
+
+# Temporary reports and editor files.
+*.tmp
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

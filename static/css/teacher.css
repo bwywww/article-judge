@@ -1,0 +1,94 @@
+/* ---------- 老师详情页 ---------- */
+.detail-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; margin-bottom: 16px; flex-wrap: wrap; }
+.detail-head h2 { font-size: 20px; }
+.detail-head .ops { display: flex; gap: 8px; flex-wrap: wrap; }
+.meta-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6px 24px; margin-top: 10px; }
+.meta-grid .item { font-size: 13px; color: var(--text-2); }
+.meta-grid .item b { color: var(--text); font-weight: 600; }
+.meta-grid .item.full { grid-column: 1 / -1; }
+
+.section-title { display: flex; align-items: center; justify-content: space-between; margin: 22px 0 12px; }
+.section-title h3 { font-size: 16px; }
+
+.stats-row { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 14px; }
+.stat-pill {
+  background: #fff; border: 1px solid var(--border); border-radius: 8px;
+  padding: 10px 18px; display: flex; flex-direction: column; align-items: center; min-width: 96px;
+}
+.stat-pill .v { font-size: 20px; font-weight: 700; }
+.stat-pill .k { font-size: 12px; color: var(--text-2); }
+
+.candidate-row { display: flex; align-items: center; gap: 10px; padding: 8px 0; border-bottom: 1px dashed var(--border); }
+.candidate-row .idx { width: 30px; flex: none; color: var(--text-2); font-size: 12px; text-align: center; }
+.candidate-row .name { width: 130px; flex: none; }
+.candidate-row .essay-title { width: 170px; flex: none; }
+.candidate-row .bind-status { width: 180px; flex: none; font-size: 12px; color: var(--text-2); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.candidate-row .bind-status.ok { color: var(--success); }
+.candidate-row .bind-status.warn { color: var(--danger); }
+.candidate-row .preview { flex: 1; color: var(--text-2); font-size: 12.5px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.candidate-row .chars { width: 56px; flex: none; color: var(--text-2); font-size: 12px; text-align: right; }
+
+.student-picker-list, .member-picker-list { display: grid; gap: 8px; max-height: 360px; overflow-y: auto; padding-right: 4px; }
+.picker-list { display: grid; gap: 8px; max-height: 360px; overflow-y: auto; margin-top: 10px; padding-right: 4px; }
+.picker-option {
+  display: flex; align-items: center; gap: 10px; padding: 10px 12px;
+  border: 1px solid var(--border); border-radius: 8px; cursor: pointer;
+}
+.picker-option:hover { border-color: var(--primary); background: var(--primary-light); }
+.picker-option input { width: 16px; height: 16px; flex: none; }
+.picker-option span { display: flex; flex-direction: column; }
+.picker-option small { color: var(--text-2); font-size: 12px; }
+.class-picker-summary { min-height: 40px; padding: 8px 0; color: var(--text-2); }
+.feedback-edit-scores { display: grid; grid-template-columns: repeat(5, minmax(110px, 1fr)); gap: 10px; }
+.import-summary { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 12px; }
+.import-preview-scroll { max-height: 390px; overflow: auto; }
+.student-number-meta { margin-top: 4px; color: var(--text-2); font-size: 11px; }
+.import-review-result { color: var(--text-2); font-size: 12px; }
+.student-choice, .member-choice {
+  display: flex; align-items: center; gap: 10px; width: 100%; text-align: left;
+  border: 1px solid var(--border); background: #fff; border-radius: 10px; padding: 10px 12px;
+}
+.student-choice { cursor: pointer; }
+.student-choice:hover, .student-choice.active { border-color: var(--primary); background: var(--primary-light); }
+.student-choice span, .member-choice em { color: var(--text-2); font-size: 12px; font-style: normal; }
+.student-choice { justify-content: space-between; }
+.member-choice input { width: 16px; height: 16px; flex: none; }
+.member-choice.disabled { opacity: .58; background: #fafbfe; }
+.member-choice > span { display: flex; flex-direction: column; line-height: 1.4; }
+.picker-context { background: #fafbfe; border: 1px solid var(--border); border-radius: 10px; padding: 10px 12px; margin-bottom: 12px; color: var(--text-2); font-size: 13px; }
+.import-class-review { margin-bottom: 12px; color: var(--text-2); font-size: 13px; }
+.import-class-review summary { width: max-content; max-width: 100%; cursor: pointer; color: var(--primary); }
+.import-class-chips { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 9px; max-height: 108px; overflow-y: auto; }
+
+.progress-card .progress-info { display: flex; justify-content: space-between; margin-top: 8px; font-size: 13px; color: var(--text-2); }
+
+.essay-preview { background: #fafbfe; border: 1px solid var(--border); border-radius: 10px; padding: 12px 14px; font-size: 13px; color: var(--text-2); max-height: 260px; overflow-y: auto; white-space: pre-wrap; }
+
+/* ---------- 批改反馈 ---------- */
+.fb-head { display: flex; align-items: center; gap: 18px; }
+.fb-score {
+  width: 92px; height: 92px; border-radius: 50%; flex: none;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  background: var(--fc, var(--primary)); color: #fff;
+}
+.fb-score .num { font-size: 34px; font-weight: 800; line-height: 1; }
+.fb-score .unit { font-size: 12px; opacity: .85; }
+.fb-level { font-size: 16px; font-weight: 700; margin-bottom: 4px; }
+.fb-summary { margin-top: 12px; background: var(--primary-light); border-radius: 10px; padding: 12px 14px; color: #3a4a8f; }
+
+.dim-row { display: flex; align-items: center; gap: 12px; margin: 10px 0; }
+.dim-row .dim-name { width: 92px; flex: none; font-size: 13px; color: var(--text-2); }
+.dim-row .dim-bar { flex: 1; height: 8px; background: #e9edf5; border-radius: 999px; overflow: hidden; }
+.dim-row .dim-bar > i { display: block; height: 100%; background: var(--primary); border-radius: 999px; }
+.dim-row .dim-val { width: 44px; flex: none; text-align: right; font-weight: 600; font-size: 13px; }
+
+.fb-sec { margin-top: 16px; }
+.fb-sec h4 { font-size: 14px; margin-bottom: 6px; display: flex; align-items: center; gap: 6px; }
+.fb-sec ul { padding-left: 2px; list-style: none; }
+.fb-sec li { padding: 5px 0 5px 22px; position: relative; font-size: 13.5px; }
+.fb-sec li::before { content: "•"; position: absolute; left: 8px; color: var(--text-2); }
+.fb-sec.good h4 { color: var(--success); }
+.fb-sec.bad h4 { color: #b45309; }
+.fb-sec.fix h4 { color: var(--primary); }
+.fb-sec.demo h4 { color: #0f766e; }
+.fb-sec.demo .demo-box { background: #f0fdfa; border: 1px solid #ccfbf1; border-radius: 10px; padding: 12px 14px; font-size: 13.5px; color: #115e59; }

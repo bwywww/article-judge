@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>作文批改平台 - 老师作业</title>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="/static/css/style.css?v=14">
+</head>
+<body class="student-page">
+  <header class="topbar">
+    <div class="brand">作文批改平台 <span class="role-tag">学生</span></div>
+    <nav class="student-top-nav" aria-label="学生功能">
+      <a class="nav-link active" href="/student/assignments" data-feature="assignments">老师作业</a>
+      <a class="nav-link" href="/student/practice" data-feature="practice">自主练习</a>
+      <a class="nav-link" href="/student/history" data-feature="reporting">成长记录</a>
+    </nav>
+    <div class="topbar-right">
+      <span class="user-name"></span>
+      <button id="btn-logout" class="btn ghost">退出</button>
+    </div>
+  </header>
+
+  <div id="banner-key" class="banner-key plain" hidden>
+    AI 接口尚未配置，请联系管理员。
+  </div>
+
+  <main class="student-main">
+    <div class="page-heading">
+      <div><h1>老师作业</h1><p>选择一项未提交或已开放重交的作业。</p></div>
+      <div class="segmented assignment-view-tabs" role="tablist" aria-label="作业分类">
+        <button class="active" data-assignment-view="pending">待完成</button>
+        <button data-assignment-view="current">本班记录</button>
+        <button data-assignment-view="historical">历史学年</button>
+      </div>
+    </div>
+    <div class="assignment-workspace">
+      <section class="assignment-list-pane" aria-label="作业列表">
+        <div class="pane-head"><h2 id="assignment-list-title">待完成</h2><span class="chip gray" id="assignment-list-count">0 项</span></div>
+        <div id="assignments-list">
+          <div class="empty compact-empty">正在加载作业...</div>
+        </div>
+      </section>
+
+      <section class="assignment-editor-pane">
+        <div class="empty compact-empty" id="assignment-placeholder">
+          <h2>选择左侧作业</h2><p>已提交的作业仅显示状态，不会再次打开编辑器。</p>
+        </div>
+        <div id="submit-card" hidden>
+          <div class="pane-head">
+            <div><h2>提交作文</h2><span class="chip blue" id="selected-chip"></span></div>
+          </div>
+          <div class="readonly-meta">
+            <label class="field"><span>老师布置的主题</span><input class="input" id="st-theme" readonly></label>
+            <label class="field"><span>写作要求</span><textarea class="input" id="st-prompt" rows="3" readonly></textarea></label>
+          </div>
+          <label class="field"><span>我的作文标题</span>
+            <input class="input" id="st-title" maxlength="120" placeholder="按自己的作文填写标题；未填写时使用老师布置的主题"></label>
+          <label class="field"><span>作文内容<span class="req"> *</span></span>
+            <textarea class="input essay-editor" id="st-text" rows="16" placeholder="在这里粘贴作文，或上传 PDF / Word / TXT 文件"></textarea></label>
+          <div class="editor-actions">
+            <input type="file" id="st-file" accept=".pdf,.docx,.txt,.md" hidden>
+            <button class="btn" id="st-upload" data-feature-write="imports">上传文件</button>
+            <span class="word-count" id="st-count">0 字</span>
+            <span class="action-spacer"></span>
+            <button class="btn primary" id="st-grade">提交并批改</button>
+          </div>
+        </div>
+
+        <div id="result-area" hidden>
+          <div class="pane-head result-head"><h2>批改结果</h2>
+            <div class="ops"><button class="btn small" id="st-export">导出 PDF</button>
+              <button class="btn small ghost" id="st-upgrade">生成润色提升版</button></div>
+          </div>
+          <div id="st-result"></div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <nav class="student-bottom-nav" aria-label="学生移动端功能">
+    <a class="active" href="/student/assignments" data-feature="assignments">老师作业</a>
+    <a href="/student/practice" data-feature="practice">自主练习</a>
+    <a href="/student/history" data-feature="reporting">成长记录</a>
+  </nav>
+  <div id="modal" class="modal" hidden role="dialog" aria-modal="true"><div class="modal-box" id="modal-box"></div></div>
+  <script type="module" src="/static/js/student.js?v=6"></script>
+</body>
+</html>

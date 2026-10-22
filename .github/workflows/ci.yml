@@ -1,0 +1,71 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  test:
+    name: ${{ matrix.os }} / Python ${{ matrix.python-version }}
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 20
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+        python-version: ['3.10', '3.13']
+    env:
+      PYTHONUTF8: '1'
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+          cache: pip
+          cache-dependency-path: |
+            requirements.txt
+            requirements-dev.txt
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install dependencies
+        run: python -m pip install -r requirements-dev.txt
+      - name: Check Python syntax
+        run: python -m compileall -q app.py database.py reporting.py wsgi.py essay_platform tools
+      - name: Check JavaScript syntax
+        run: |
+          set -euo pipefail
+          while IFS= read -r -d '' script; do
+            node --input-type=module --check < "$script"
+          done < <(find static/js -type f -name '*.js' -print0)
+      - name: Check module boundaries
+        run: python tools/architecture_test.py
+      - name: Check roster privacy
+        run: python tools/roster_privacy_test.py
+      - name: Check AI endpoint security
+        run: python tools/ai_endpoint_security_test.py
+      - name: Check business workflows
+        run: python tools/regression_test.py
+      - name: Check archives and revisions
+        run: python tools/archive_features_test.py
+      - name: Check OCR jobs
+        run: python tools/ocr_jobs_test.py
+      - name: Check data recovery
+        run: python tools/data_recovery_test.py
+      - name: Check reports
+        run: python tools/reporting_test.py
+      - name: Check WSGI entry point
+        run: python tools/wsgi_smoke_test.py
+      - name: Check patch whitespace
+        run: git diff --check

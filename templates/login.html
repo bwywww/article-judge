@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>作文批改平台 - 登录</title>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="/static/css/style.css?v=14">
+</head>
+<body>
+  <div class="login-wrap">
+    <div class="card login-card">
+      <div class="logo login-mark">文</div>
+      <h1>作文批改平台</h1>
+      <div class="sub">老师作业批改与学生自主练习</div>
+      <div id="banner-key" class="banner-key plain" style="border-radius:8px;margin-bottom:16px;text-align:center" hidden>
+        AI 接口尚未配置，请使用管理员账号登录后配置。
+      </div>
+
+      <div class="tabs">
+        <div class="tab active" data-tab="login">登 录</div>
+      </div>
+
+      <div id="pane-login">
+        <form id="form-login">
+          <label class="field"><span>用户名</span>
+            <input class="input" name="username" placeholder="请输入用户名" required autofocus></label>
+          <label class="field"><span>密码</span>
+            <input class="input" name="password" type="password" placeholder="请输入密码" required></label>
+          <div class="form-status" id="login-status" role="status" aria-live="polite"></div>
+          <button class="btn primary" id="login-submit" style="width:100%;padding:10px" type="submit">登 录</button>
+        </form>
+      </div>
+
+      <div style="margin-top:16px;color:var(--text-2);font-size:12px;text-align:center">
+        账号由管理员统一创建；首次登录或密码重置后必须修改临时密码。
+      </div>
+    </div>
+  </div>
+
+  <div id="modal" class="modal" hidden><div class="modal-box" id="modal-box"></div></div>
+  <script type="module">
+    import { api, openPasswordChangeModal, toast, wireModal } from "/static/js/shared/index.js";
+    // 标签切换
+    document.querySelectorAll(".tabs .tab").forEach(tab => {
+      tab.addEventListener("click", () => {
+        document.querySelectorAll(".tabs .tab").forEach(t => t.classList.remove("active"));
+        tab.classList.add("active");
+        const mode = tab.dataset.tab;
+        document.getElementById("pane-login").hidden = mode !== "login";
+        const reg = document.getElementById("pane-register");
+        if (reg) reg.hidden = mode !== "register";
+      });
+    });
+
+    // 登录
+    const loginForm = document.getElementById("form-login");
+    const loginPassword = loginForm.elements.password;
+    const loginStatus = document.getElementById("login-status");
+    const loginSubmit = document.getElementById("login-submit");
+    const setLoginStatus = (message, type = "") => {
+      loginStatus.textContent = message;
+      loginStatus.className = `form-status ${type}`.trim();
+    };
+    loginPassword.addEventListener("keydown", event => {
+      if (event.key !== "Enter") return;
+      event.preventDefault();
+      loginForm.requestSubmit();
+    });
+    loginForm.addEventListener("submit", async e => {
+      e.preventDefault();
+      if (loginSubmit.disabled) return;
+      const fd = new FormData(e.target);
+      loginSubmit.disabled = true;
+      loginSubmit.textContent = "正在验证…";
+      setLoginStatus("正在验证账号和密码…", "pending");
+      try {
+        const r = await api("/api/login", { method: "POST", body: JSON.stringify({
+          username: fd.get("username").trim(), password: fd.get("password"),
+        }) });
+        localStorage.setItem("token", r.token);
+        localStorage.setItem("username", r.username);
+        localStorage.setItem("role", r.role);
+        const destination = r.role === "admin" ? "/admin" : r.role === "teacher" ? "/teacher" : "/student/assignments";
+        if (r.mustChangePassword) {
+          setLoginStatus("密码正确，请先设置新密码。", "success");
+          await openPasswordChangeModal({
+            forced: true,
+            currentPassword: fd.get("password"),
+            onSuccess: () => { location.href = destination; },
+          });
+        } else {
+          setLoginStatus("密码正确，登录成功，正在进入…", "success");
+          await new Promise(resolve => setTimeout(resolve, 180));
+          location.href = destination;
+        }
+      } catch (err) {
+        setLoginStatus(err.message, "error");
+        toast(err.message, "error");
+        loginSubmit.disabled = false;
+        loginSubmit.textContent = "登 录";
+        loginPassword.focus();
+        loginPassword.select();
+      }
+    });
+
+    wireModal();
+    // 检查是否已配置 Key，用于显示提示条
+    api("/api/config").then(c => {
+      window.hasKey = c.has_key;
+      document.getElementById("banner-key").hidden = c.has_key;
+    });
+  </script>
+</body>
+</html>

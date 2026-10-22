@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>作文批改平台 - 管理后台</title>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="/static/css/style.css?v=14">
+</head>
+<body class="workspace-page">
+  <header class="topbar">
+    <div class="topbar-start">
+      <button class="btn icon-btn workspace-menu" type="button" aria-label="打开导航" title="打开导航">☰</button>
+      <div class="brand">作文批改平台 <span class="role-tag">管理员</span></div>
+    </div>
+    <div class="topbar-right">
+      <span class="user-name"></span>
+      <button id="btn-logout" class="btn ghost">退出</button>
+    </div>
+  </header>
+
+  <div id="banner-key" class="banner-key" hidden>
+    AI 接口尚未配置，批改功能暂不可用。点击配置。
+  </div>
+
+  <div class="workspace admin-workspace">
+    <aside class="workspace-nav" aria-label="管理员功能">
+      <button class="nav-item admin-nav" data-tab="teachers" data-feature="directory">老师</button>
+      <button class="nav-item admin-nav" data-tab="students" data-feature="directory">学生</button>
+      <button class="nav-item admin-nav" data-tab="classes" data-feature="directory">班级</button>
+      <button class="nav-item admin-nav" data-tab="school" data-feature="academic_years">学年与恢复</button>
+      <button class="nav-item admin-nav" data-tab="audit">审计日志</button>
+      <button class="nav-item admin-nav" data-tab="modules">功能模块</button>
+      <button class="nav-item admin-nav" data-tab="ai" data-feature="operations">AI 管理</button>
+    </aside>
+    <main class="workspace-main admin-main">
+      <div id="admin-root"></div>
+    </main>
+  </div>
+  <button class="workspace-backdrop" type="button" aria-label="关闭导航"></button>
+
+  <div id="modal" class="modal" hidden role="dialog" aria-modal="true">
+    <div class="modal-box" id="modal-box"></div>
+  </div>
+  <script type="module" src="/static/js/admin.js?v=13"></script>
+</body>
+</html>

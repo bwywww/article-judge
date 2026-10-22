@@ -1,0 +1,48 @@
+/* Desktop is the maintained presentation target for the school workstation. */
+html,
+body {
+  min-width: 1200px;
+}
+
+.workspace-menu,
+.workspace-backdrop,
+.student-bottom-nav {
+  display: none !important;
+}
+
+.workspace-shell {
+  min-width: 1200px;
+}
+
+.workspace-sidebar {
+  display: flex !important;
+  position: static !important;
+  transform: none !important;
+}
+
+.workspace-main,
+.student-main,
+.teacher-main,
+.admin-main {
+  min-width: 0;
+}
+
+.student-top-nav {
+  display: flex !important;
+}
+
+.table-wrap,
+.candidate-list,
+.student-picker-list {
+  scrollbar-gutter: stable;
+}
+
+@media (min-width: 1600px) {
+  .workspace-shell {
+    grid-template-columns: 220px minmax(320px, 390px) minmax(0, 1fr);
+  }
+
+  .admin-workspace .workspace-shell {
+    grid-template-columns: 220px minmax(0, 1fr);
+  }
+}

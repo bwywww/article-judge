@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>作文批改平台 - 成长记录</title>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="/static/css/style.css?v=14">
+</head>
+<body class="student-page">
+  <header class="topbar">
+    <div class="brand">作文批改平台 <span class="role-tag">学生</span></div>
+    <nav class="student-top-nav" aria-label="学生功能">
+      <a class="nav-link" href="/student/assignments" data-feature="assignments">老师作业</a>
+      <a class="nav-link" href="/student/practice" data-feature="practice">自主练习</a>
+      <a class="nav-link active" href="/student/history" data-feature="reporting">成长记录</a>
+    </nav>
+    <div class="topbar-right">
+      <span class="user-name"></span>
+      <button id="btn-logout" class="btn ghost">退出</button>
+    </div>
+  </header>
+
+  <main class="student-main">
+    <div class="page-heading">
+      <div><h1>成长记录</h1><p>老师作业和自主练习分开统计，作文版本只对本人可见。</p></div>
+      <div class="segmented" role="tablist">
+        <button class="active" data-type="assignment">老师作业</button>
+        <button data-type="practice">自主练习</button>
+      </div>
+    </div>
+    <section class="data-surface growth-chart-panel" data-feature="analytics">
+      <div class="pane-head"><div><h2>成绩趋势</h2><p>纵轴固定为 0–100 分</p></div>
+        <div class="chart-legend"><span class="assignment-line">老师作业</span><span class="practice-line">自主练习</span></div></div>
+      <div class="chart-shell"><canvas id="growth-chart" aria-label="历次作文成绩折线图"></canvas></div>
+      <div class="empty compact-empty" id="growth-empty" hidden>完成并发布作文后，这里会显示成绩趋势。</div>
+    </section>
+    <div class="history-workspace">
+      <section class="history-list-pane">
+        <div id="history-list"><div class="empty compact-empty">正在加载历史...</div></div>
+        <div class="pagination" id="history-pagination"></div>
+      </section>
+      <section class="history-detail-pane">
+        <div class="empty compact-empty" id="history-placeholder"><h2>选择一条记录</h2><p>查看完整批改意见与作文原文。</p></div>
+        <div id="history-detail" hidden></div>
+      </section>
+    </div>
+  </main>
+
+  <nav class="student-bottom-nav" aria-label="学生移动端功能">
+    <a href="/student/assignments" data-feature="assignments">老师作业</a>
+    <a href="/student/practice" data-feature="practice">自主练习</a>
+    <a class="active" href="/student/history" data-feature="reporting">成长记录</a>
+  </nav>
+  <div id="modal" class="modal" hidden role="dialog" aria-modal="true"><div class="modal-box" id="modal-box"></div></div>
+  <script src="/static/vendor/chart.umd.min.js?v=4.4.7"></script>
+  <script type="module" src="/static/js/student_history.js?v=3"></script>
+</body>
+</html>

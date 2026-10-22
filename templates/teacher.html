@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>作文批改平台 - 老师工作台</title>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="/static/css/style.css?v=15">
+</head>
+<body class="workspace-page">
+  <header class="topbar">
+    <div class="topbar-start">
+      <button class="btn icon-btn workspace-menu" type="button" aria-label="打开导航" title="打开导航">☰</button>
+      <div class="brand">作文批改平台 <span class="role-tag">老师</span></div>
+    </div>
+    <div class="topbar-right">
+      <span class="user-name"></span>
+      <button id="btn-logout" class="btn ghost">退出</button>
+    </div>
+  </header>
+
+  <div id="banner-key" class="banner-key plain" hidden>
+    AI 接口尚未配置，请联系管理员。
+  </div>
+
+  <div class="workspace teacher-workspace">
+    <aside class="workspace-nav" aria-label="老师功能">
+      <button class="nav-item active" id="btn-dashboard" data-feature="assignments">最近作文</button>
+      <button class="nav-item" id="btn-students" data-feature="directory">学生信息</button>
+      <button class="nav-item" id="btn-assignments" data-feature="assignments">作文管理</button>
+      <button class="nav-item" id="btn-records" data-feature="reporting">提交记录</button>
+      <button class="nav-item" id="btn-profile">我的信息</button>
+    </aside>
+
+    <main class="workspace-main teacher-main" id="main">
+      <section id="dashboard"></section>
+      <section id="assignment-management" hidden>
+        <div class="page-heading compact-heading">
+          <div><h1>作文管理</h1><p>按布置时间查看每次主题作文，进入后管理名单、批改与发布。</p></div>
+          <button class="btn primary" id="btn-new-assignment" data-feature-write="assignments">布置作文</button>
+        </div>
+        <div class="data-toolbar assignment-toolbar">
+          <div class="search-group"><input class="input" id="assignment-query" placeholder="搜索主题或班级"></div>
+          <span class="data-count" id="assignment-count"></span>
+        </div>
+        <div id="assignment-list" class="assignment-card-grid"></div>
+      </section>
+      <div id="detail" hidden></div>
+      <div id="records" hidden></div>
+      <div id="students" hidden></div>
+      <div id="profile" hidden></div>
+    </main>
+  </div>
+  <button class="workspace-backdrop" type="button" aria-label="关闭导航"></button>
+
+  <div id="modal" class="modal" hidden role="dialog" aria-modal="true">
+    <div class="modal-box" id="modal-box"></div>
+  </div>
+  <input type="file" id="file-input" accept=".pdf,.docx,.txt,.md,.png,.jpg,.jpeg" hidden>
+  <script src="/static/vendor/chart.umd.min.js?v=4.4.7"></script>
+  <script type="module" src="/static/js/teacher.js?v=18"></script>
+</body>
+</html>
